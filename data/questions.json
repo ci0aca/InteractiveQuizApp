@@ -1,0 +1,30 @@
+{
+  "quizzes": {
+    "1": {
+      "title": "Quiz Cultură Generală",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Care este capitala României?",
+          "options": ["București", "Cluj", "Timișoara", "Iași"],
+          "correct": "București"
+        },
+        {
+          "id": 2,
+          "text": "Cine a scris \"Scrisoarea III\"?",
+          "options": ["Mihai Eminescu", "George Coșbuc", "Vasile Alecsandri", "Mihai Viteazul"],
+          "correct": "Mihai Eminescu"
+        },
+        {
+          "id": 3,
+          "text": "Care este cel mai lung fluviu din lume?",
+          "options": ["Amazon", "Nil", "Dunărea", "Mississippi"],
+          "correct": "Amazon"
+        }
+      ]
+    }
+  }
+}
+
+
+  

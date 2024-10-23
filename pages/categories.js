@@ -1,20 +1,24 @@
-import Link from 'next/link';
+// pages/categories.js
+import Link from 'next/link'; 
+import questions from '../data/questions.json'; 
 
-export default function Categories() {
-  const categories = [
-    { id: 1, name: 'Cultură Generală' },
-  ];
+const Categories = () => {
+  const quizzes = questions.quizzes; 
 
   return (
     <div>
       <h1>Categorii</h1>
       <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <Link href={`/quiz/${category.id}`}>{category.name}</Link>
+        {Object.keys(quizzes).map((quizId) => (
+          <li key={quizId}>
+            <Link href={`/quiz/${quizId}`}>
+              {quizzes[quizId].title} {/* Afișează titlul quiz-ului */}
+            </Link>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default Categories;
