@@ -1,0 +1,28 @@
+/* styles/Categories.module.css */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.quizList {
+  margin-bottom: 40px;
+}
+
+.quizList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.quizList li {
+  margin: 10px 0; /* Spațiu între quiz-uri */
+}
+
+.addQuestion {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px; /* Spațiu deasupra formularului de adăugare întrebare */
+}
