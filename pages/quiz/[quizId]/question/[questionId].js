@@ -1,56 +1,76 @@
-import { useRouter } from 'next/router';
+// pages/quiz/[quizId]/question/[questionId].js
+import { useState } from 'react';
 
-const quizzes = {
-  1: {
-    questions: [
-      {
-        id: 1,
-        text: 'Care este capitala României?',
-        options: ['București', 'Cluj', 'Timișoara', 'Iași'],
-        correct: 'București',
-      },
-      {
-        id: 2,
-        text: 'Cine a scris "Scrisoarea III"?',
-        options: ['Mihai Eminescu', 'George Coșbuc', 'Vasile Alecsandri', 'Mihai Viteazul'],
-        correct: 'Mihai Eminescu',
-      },
-      {
-        id: 3,
-        text: 'Care este cel mai lung fluviu din lume?',
-        options: ['Amazon', 'Nil', 'Dunărea', 'Mississippi'],
-        correct: 'Amazon',
-      },
-    ],
-  },
-};
+const Quiz = ({ questions }) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userScore, setUserScore] = useState(0); 
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+  const [isQuizFinished, setIsQuizFinished] = useState(false);
 
-export default function Question() {
-  const router = useRouter();
-  const { quizId, questionId } = router.query;
-  const quiz = quizzes[quizId];
-  const currentQuestionId = parseInt(questionId);
-  const question = quiz.questions.find(q => q.id === currentQuestionId);
+  const currentQuestion = questions[currentQuestionIndex];
 
-  const goToNextQuestion = () => {
-    const nextQuestionId = currentQuestionId + 1;
-    if (nextQuestionId <= quiz.questions.length) {
-      router.push(`/quiz/${quizId}/question/${nextQuestionId}`);
+  const handleAnswerSelection = (answer) => {
+    setSelectedAnswer(answer);
+    if (answer === currentQuestion.correct) {
+      setIsAnswerCorrect(true);
+      setUserScore(userScore + 1); 
     } else {
-      alert('Ai terminat quiz-ul!'); // Sau poți redirecționa către o pagină de rezultate
+      setIsAnswerCorrect(false);
     }
+  };
+
+  const handleNextQuestion = () => {
+    const nextQuestionIndex = currentQuestionIndex + 1;
+    if (nextQuestionIndex < questions.length) {
+      setCurrentQuestionIndex(nextQuestionIndex);
+      setSelectedAnswer('');
+      setIsAnswerCorrect(null);
+    } else {
+      setIsQuizFinished(true); 
+    }
+  };
+
+  const handleRestartQuiz = () => {
+    setCurrentQuestionIndex(0);
+    setUserScore(0); 
+    setIsQuizFinished(false);
+    setSelectedAnswer('');
+    setIsAnswerCorrect(null);
   };
 
   return (
     <div>
-      <h1>{question.text}</h1>
-      <ul>
-        {question.options.map((option, index) => (
-          <li key={index}>{option}</li>
-        ))}
-      </ul>
-      <button onClick={goToNextQuestion}>Întrebarea următoare</button>
+      <h1>Quiz Cultură Generală</h1>
+      <p>Punctaj: {userScore}</p>
+      {isQuizFinished ? (
+        <div>
+          <h2>Quiz complet! Felicitări!</h2>
+          <p>Punctajul tău este: {userScore}</p>
+          <button onClick={handleRestartQuiz}>Restart</button>
+        </div>
+      ) : (
+        <div>
+          <h2>{currentQuestion.text}</h2>
+          <ul>
+            {currentQuestion.options.map((option, index) => (
+              <li key={index} onClick={() => handleAnswerSelection(option)}>
+                {option}
+              </li>
+            ))}
+          </ul>
+          {isAnswerCorrect !== null && (
+            <p>
+              {isAnswerCorrect ? 'Corect!' : `Greșit! Răspunsul corect este: ${currentQuestion.correct}`}
+            </p>
+          )}
+          {isAnswerCorrect !== null && (
+            <button onClick={handleNextQuestion}>Următoarea întrebare</button>
+          )}
+        </div>
+      )}
     </div>
   );
-}
+};
 
+export default Quiz;
