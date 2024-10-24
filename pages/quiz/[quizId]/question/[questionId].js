@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const Quiz = ({ questions }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userScore, setUserScore] = useState(0); // Starea pentru punctaj
+  const [userScore, setUserScore] = useState(0); 
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
   const [isQuizFinished, setIsQuizFinished] = useState(false);
@@ -14,7 +14,7 @@ const Quiz = ({ questions }) => {
     setSelectedAnswer(answer);
     if (answer === currentQuestion.correct) {
       setIsAnswerCorrect(true);
-      setUserScore(userScore + 1); // Actualizează punctajul
+      setUserScore(userScore + 1); 
     } else {
       setIsAnswerCorrect(false);
     }
@@ -27,13 +27,13 @@ const Quiz = ({ questions }) => {
       setSelectedAnswer('');
       setIsAnswerCorrect(null);
     } else {
-      setIsQuizFinished(true); // Setează quiz-ul ca finalizat
+      setIsQuizFinished(true); 
     }
   };
 
   const handleRestartQuiz = () => {
     setCurrentQuestionIndex(0);
-    setUserScore(0); // Resetează punctajul
+    setUserScore(0); 
     setIsQuizFinished(false);
     setSelectedAnswer('');
     setIsAnswerCorrect(null);

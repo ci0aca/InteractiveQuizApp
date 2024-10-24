@@ -22,7 +22,32 @@
           "correct": "Amazon"
         }
       ]
+    },
+    "2": {
+      "title": "Quiz Mate",
+      "questions": [
+        {
+          "id": 1,
+          "text": "3*3?",
+          "options": ["12", "14", "9", "31"],
+          "correct": "9"
+        },
+        {
+          "id": 2,
+          "text": "3:3?",
+          "options": ["2", "4", "1", "7"],
+          "correct": "1"
+        },
+        {
+          "id": 3,
+          "text": "2*2",
+          "options": ["4", "5", "8", "1"],
+          "correct": "4"
+        }
+      ]
     }
+
+
   }
 }
 
